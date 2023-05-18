@@ -1,0 +1,49 @@
+body{
+  margin:auto;
+}
+
+/*  Card CSS */
+
+.playIcon{
+  display: none;
+  position: absolute;
+  top: 75px;
+  left: 75px;
+  width:200px;
+}
+
+.card:hover + .playIcon{
+  color:black;
+  display: inline-block;
+}
+
+.card{
+  margin:10px;
+  background-image: linear-gradient(#5C5C5C ,#000000);
+  display: inline-block;
+  width:180px;
+  height:325px;
+  border-radius: 5px;
+  border-color: aliceblue;
+  color:white;
+}
+
+.card img{
+  margin: 5px;
+  height:170px;
+  width:170px;
+}
+.card h2,p{
+  padding: 0px 10px;
+}
+
+
+/* Series container */
+
+.seriesContainer{
+  width:77vw;
+  height:360px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: row;
+}
