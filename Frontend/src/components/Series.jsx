@@ -1,8 +1,11 @@
 import React from "react";
 import { Song } from "./Song";
+
 const Series = (props)=>{
     return(
-        <div className="seriesContainer">
+        <div className="container">
+            <h1>{props.title}</h1>
+            <div className="seriesContainer">
             {props.songs.map((song)=>{
                 return (
                     <Song 
@@ -13,6 +16,7 @@ const Series = (props)=>{
                     />
                 )
             })}
+            </div>
         </div>
     )
 }
