@@ -11,9 +11,9 @@ const Header = () => {
 
   return (
     <header>
-      <div class="header-container">
-        <h1 class="header-title">Listening is Everything</h1>
-        <div class="header-controls">
+      <div className="header-container">
+        <h1 className="header-title">Listening is Everything</h1>
+        <div className="header-controls">
           {isLoggedIn && (
             <button onClick={handleLogout} class="header-control">Logout</button>
           )}

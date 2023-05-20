@@ -6,9 +6,10 @@ const Series = (props)=>{
         <div className="container">
             <h1>{props.title}</h1>
             <div className="seriesContainer">
-            {props.songs.map((song)=>{
+            {props.songs.map((song,index)=>{
                 return (
                     <Song 
+                        key={index}
                         img={song.songImageUrl}
                         name={song.name}
                         duration={song.duration}
