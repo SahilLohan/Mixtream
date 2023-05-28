@@ -3,14 +3,7 @@ import { IconButton, ListItem, ListItemIcon, ListItemText , Avatar } from '@mui/
 import { Home, Search, LibraryMusic, Settings } from '@mui/icons-material';
 import logo from "../images/logo.png"
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    // Set the sidebar to be expanded if the current page is the home page
-    if (window.location.pathname === "/") {
-      setIsExpanded(true);
-    }
-  }, []);
 
   return (
     <div className="sidebar">

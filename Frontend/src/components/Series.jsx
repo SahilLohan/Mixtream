@@ -10,7 +10,7 @@ const Series = (props)=>{
                 return (
                     <Song 
                         key={index}
-                        img={song.songImageUrl}
+                        img={song.image}
                         name={song.name}
                         duration={song.duration}
                         artist={song.artist}

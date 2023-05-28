@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Avatar } from "@mui/material";
 
-const Header = () => {
+const Header = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userImage, setUserImage] = useState(null);
+  const [userImage] = useState(props.image);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
