@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 login.post("/",async (req,res)=>{
 
     // lets check if user exist or not
-    let user = await User.findOne({email:req.body.email}); // returns the whole user
+    var user = await User.findOne({email:req.body.email}); // returns the whole user
     if(!user)
         return res.status(400).send({message:"Invalid Email"});
 
@@ -15,8 +15,12 @@ login.post("/",async (req,res)=>{
     if(!validPassword)
         return res.status(400).send({message:"Invalid password"});
 
+    user = await User.findOne({email:req.body.email}).select("-password -__v");
     const token = user.generateAuthToken();
-    res.status(200).send({data:token,message:"Signing in please wait ..."})
+    res.status(200).send({data:{
+        Token:token,
+        UserDetails:user
+    },message:"Signing in please wait ..."})
     
 })  
 

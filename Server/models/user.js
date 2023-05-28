@@ -26,7 +26,7 @@ userSchema.methods.generateAuthToken = function()
     return token; 
 }
 
-const Uservalidator = (user)=>{
+const userValidator = (user)=>{
     const schema = joi.object({
     name:joi.string().required(),   
     email:joi.string().required().email(),
@@ -38,4 +38,4 @@ const Uservalidator = (user)=>{
 
 const User = mongoose.model("user",userSchema);
 
-module.exports = {User,Uservalidator};
+module.exports = {User,userValidator};
