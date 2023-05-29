@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import LoginPage from "./LoginPage"
 import SignupPage from "./signupPage"
 import LandingPage from "./LandingPage";
@@ -7,15 +8,14 @@ import { BrowserRouter as Router,Route,Routes } from "react-router-dom";
 
 const App = ()=>{
     // // important code
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    console.log(userData.data.Token);
+    const [userData,setUserData] = useState(JSON.parse(localStorage.getItem('userData'))); 
 
     return(
         <Router>
             <Routes >
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={<LoginPage setUserDataState={setUserData} />} />
                 <Route path="/signup" element={<SignupPage />} />
-                <Route path="/" element={ userData.data == undefined ? <LandingPage /> : <Main /> }/>
+                <Route path="/" element={ userData == undefined ? <LandingPage /> : <Main /> }/>
             </Routes>
         </Router>
     )

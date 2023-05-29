@@ -6,7 +6,7 @@ import logo from "../images/logo.png"
 import {useNavigate} from "react-router-dom";
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
   var loginResponse;
   var navigate = useNavigate();
@@ -41,7 +41,8 @@ const LoginPage = () => {
             localStorage.setItem('userData', loginResponseString);
 
             // Retrieve the JSON string from local storage
-            const userDetailsString = localStorage.getItem('userDetails');
+            const userDetailsString = localStorage.getItem('userData');
+            props.setUserDataState(loginResponse.data);
             console.log("I am getting data from local storage :\n",userDetailsString);
             // // Convert the JSON string back to an array
             // const userDetails = JSON.parse(userDetailsString);
