@@ -1,6 +1,6 @@
 import { IconButton} from "@mui/material";
 import { Pause, PlayArrow, VolumeUp, VolumeDown, ArrowRight, ArrowLeft } from "@mui/icons-material";
-import { useState, useRef } from 'react'
+import { useState, useRef , useEffect } from 'react'
 import Slider from './slider/Slider'
 
 // const songSchema = new mongoose.Schema({
@@ -21,6 +21,11 @@ const MusicBar = (props) => {
   const [song,setSong] = useState(props.array[props.index].songUrl);
   const [index,setIndex]=useState(props.index);
   const audioRef = useRef()
+
+  useEffect(() => {
+    setSong(props.array[props.index].songUrl);
+    setIndex(props.index);
+  }, [props.index,props.array]);
 
   const onChange = (e) => {
     const audio = audioRef.current;

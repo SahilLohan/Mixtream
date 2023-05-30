@@ -30,22 +30,14 @@ const LoginPage = (props) => {
             const url ="http://localhost:8080/api/login";
              loginResponse = await axios.post(url, data);
             setIsFetching(false);
-            console.log("Login successfully");
-            console.log(loginResponse.data);
             // Assuming you have received the user details as an array called 'loginResponse' from the server
 
             // Convert the array to JSON string
             const loginResponseString = JSON.stringify(loginResponse.data);
-            console.log(loginResponseString)
             // Store the JSON string in local storage
             localStorage.setItem('userData', loginResponseString);
-
-            // Retrieve the JSON string from local storage
-            const userDetailsString = localStorage.getItem('userData');
             props.setUserDataState(loginResponse.data);
-            console.log("I am getting data from local storage :\n",userDetailsString);
             // // Convert the JSON string back to an array
-            // const userDetails = JSON.parse(userDetailsString);
             const notify = () => toast.success("Signing in please wait...",{
               position:"bottom-center"
             });
