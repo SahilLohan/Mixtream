@@ -3,6 +3,7 @@ const { PlayList, validate } = require("../models/playList");
 const { Song } = require("../models/song");
 const { User } = require("../models/user");
 const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 const validateObjectId = require("../middleware/validObjectId");
 const Joi = require("joi");
 
@@ -11,12 +12,15 @@ router.post("/", auth, async (req, res) => {
 	const { error } = validate(req.body);
 	if (error) return res.status(400).send({ message: error.details[0].message });
 
-	const user = await User.findById(req.user._id);
-	const playList = await PlayList({ ...req.body, user: user._id }).save();
+	const user = await User.findById(req.body.userid);
+	var playList = await PlayList({ ...req.body}).save();
 	user.playlists.push(playList._id);
 	await user.save();
 
-	res.status(201).send({ data: playList });
+	const sendIt = await User.findById(req.body.userid).select("-__v -password")
+    res.status(200).send({
+        UserDetails:sendIt
+    })
 });
 
 // edit playlist by id
@@ -100,17 +104,22 @@ router.get("/random", auth, async (req, res) => {
 	res.status(200).send({ data: playlists });
 });
 
+
 // get playlist by id
-router.get("/:id", [validateObjectId, auth], async (req, res) => {
-	const playlist = await PlayList.findById(req.params.id);
+router.get("/:id", [auth], async (req, res) => {
+	
+	const id = req.params.id;
+	const playlist = await PlayList.findById(id)
 	if (!playlist) return res.status(404).send("not found");
 
+
 	const songs = await Song.find({ _id: playlist.songs });
-	res.status(200).send({ data: { playlist, songs } });
+	res.status(200).send({playlist:playlist,songs:songs});
+
 });
 
 // get all playlists
-router.get("/", auth, async (req, res) => {
+router.get("/",[auth,admin] , async (req, res) => {
 	const playlists = await PlayList.find();
 	res.status(200).send({ data: playlists });
 });
